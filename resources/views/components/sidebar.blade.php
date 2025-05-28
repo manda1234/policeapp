@@ -3,7 +3,8 @@
     <div>
         <div class="brand-logo d-flex align-items-center justify-content-between">
             <a href="./index.html" class="text-nowrap logo-img">
-                <img src="../assets/images/logos/logo.svg" alt="" />
+            <img src="../assets/images/logos/POLICE APP.JPG" alt="" style="max-width: 100%; height: auto; border-radius: 8px;" />
+
             </a>
             <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
                 <i class="ti ti-x fs-6"></i>
@@ -17,13 +18,13 @@
                     <span class="hide-menu">Home</span>
                 </li>
                 <li class="sidebar-item">
-                    <a class="sidebar-link" href="" aria-expanded="false">
+                    <a class="sidebar-link" href="{{ url('/panel-control/dashboard') }}" aria-expanded="false">
                         <i class="ti ti-atom"></i>
                         <span class="hide-menu">Dashboard</span>
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a class="sidebar-link" href="" aria-expanded="false">
+                    <a class="sidebar-link" href="{{ url('/panel-control/vehicles') }}" aria-expanded="false">
                         <i class="ti ti-car"></i>
                         <span class="hide-menu">Vehicles</span>
                     </a>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -77,7 +78,7 @@ class AuthController extends Controller
                 'user'  => $user,
                 'token' => $token
             ],
-        ], 200);
+        ], 200)->withCookie(cookie('token',$token,60,null,null,true,false));
 
     }
 
@@ -110,4 +111,6 @@ class AuthController extends Controller
     {
         return view('register');
     }
+
+    
 }

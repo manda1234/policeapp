@@ -97,4 +97,9 @@ class VehiclesController extends Controller
             'data' => []
         ]);
     }
+
+    public function indexPage()
+    {
+        return view('vehicles.index');
+    }
 }
