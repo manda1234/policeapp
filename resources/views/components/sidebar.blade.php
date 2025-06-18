@@ -29,6 +29,12 @@
                         <span class="hide-menu">Vehicles</span>
                     </a>
                 </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link" href="{{ url('/panel-control/Officers') }}" aria-expanded="false">
+                        <i class="ti ti-user"></i>
+                        <span class="hide-menu">Officer</span>
+                    </a>
+                </li>
             </ul>
         </nav>
         <!-- End Sidebar navigation -->

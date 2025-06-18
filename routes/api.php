@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\OfficerController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\VehiclesController;
@@ -15,5 +16,7 @@ Route::group(['prefix' => 'panel-control', 'middleware' => ['auth:sanctum']], fu
 
     // vehicles routes
     Route::apiResource('vehicles', VehiclesController::class);
+    //officer routes
+     Route::apiResource('officers', OfficerController::class);
 
 });
