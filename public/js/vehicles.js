@@ -71,7 +71,6 @@ if (window.location.pathname.includes('/panel-control/vehicles')) {
         document.getElementById("editIsStolenError").textContent = "";
     }
 
-
     async function addVehicle(event) {
         event.preventDefault();
         clearCreateFormErrors();
@@ -157,7 +156,7 @@ if (window.location.pathname.includes('/panel-control/vehicles')) {
         });
 
         // inisiasi data tables
-       $('#vehiclesTable').DataTable({
+        $('#vehiclesTable').DataTable({
             responsive: true,
             autoWidth: false,
             pageLength: 10,
@@ -168,16 +167,17 @@ if (window.location.pathname.includes('/panel-control/vehicles')) {
                 info: "Menampilkan _START_ sampai _END_ dari _TOTAL_ entri",
                 infoEmpty: "Tidak ada data yang tersedia",
                 paginate: {
-                first: "Pertama",
-                last: "Terakhir",
-                next: "Selanjutnya",
-                previous: "Sebelumnya",
+                    first: "Pertama",
+                    last: "Terakhir",
+                    next: "Selanjutnya",
+                    previous: "Sebelumnya",
                 },
             }
-            });
+        });
     }
 
-    function showEditVehicleModal(id, index) {
+    // Fixed edit is_stolen logic
+    window.showEditVehicleModal = function(id, index) {
         clearEditFormErrors();
         const item = window.vehicleData[index];
 
@@ -187,12 +187,16 @@ if (window.location.pathname.includes('/panel-control/vehicles')) {
         document.getElementById("editBrand").value = item.brand || '';
         document.getElementById("editColor").value = item.color || '';
 
-        if (item.is_stolen) {
+        // Fix: Explicitly compare to 1, covers "1", 1, "0", 0
+        if (item.is_stolen == 1) {
             document.getElementById("editIsStolenYes").checked = true;
+            document.getElementById("editIsStolenNo").checked = false;
         } else {
+            document.getElementById("editIsStolenYes").checked = false;
             document.getElementById("editIsStolenNo").checked = true;
         }
     }
+
     async function updateVehicle(event) {
         event.preventDefault();
         clearEditFormErrors();
@@ -202,7 +206,8 @@ if (window.location.pathname.includes('/panel-control/vehicles')) {
         const type = document.getElementById("editType").value.trim();
         const brand = document.getElementById("editBrand").value.trim();
         const color = document.getElementById("editColor").value.trim();
-        const isStolen = document.getElementById("editIsStolenYes").checked ? 1 : 0;
+        // Ambil value radio button yang terpilih
+        const isStolen = document.querySelector('input[name="editIsStolen"]:checked')?.value === '1';
 
         const token = decodeURIComponent(getCookie('token'));
 
@@ -253,6 +258,7 @@ if (window.location.pathname.includes('/panel-control/vehicles')) {
     }
 }
 
+// Fungsi global
 async function confirmDeleteVehicle(id) {
     console.log("Delete vehicle with ID:", id);
     const result = await Swal.fire({
@@ -296,4 +302,11 @@ async function deleteVehicle(id) {
         const errorMessage = error.response?.data?.message || "Terjadi kesalahan saat menghapus data.";
         showErrorToast(errorMessage);
     }
+}
+
+// Pastikan ada fungsi getCookie
+function getCookie(name) {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(';').shift();
 }
