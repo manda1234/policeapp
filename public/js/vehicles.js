@@ -71,6 +71,7 @@ if (window.location.pathname.includes('/panel-control/vehicles')) {
         document.getElementById("editIsStolenError").textContent = "";
     }
 
+
     async function addVehicle(event) {
         event.preventDefault();
         clearCreateFormErrors();
@@ -145,7 +146,7 @@ if (window.location.pathname.includes('/panel-control/vehicles')) {
                 <td>${item.type}</td>
                 <td>${item.brand}</td>
                 <td>${item.color}</td>
-                <td>${parseInt(item.is_stolen) === 1 ? 'Yes' : 'No'}</td>
+                <td>${Number(item.is_stolen) === 1 ? 'yes' : 'no'}</td>
                 <td>
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                         data-bs-target="#editVehicleModal" onclick="showEditVehicleModal(${item.id}, ${index})">Edit</button>
@@ -157,27 +158,26 @@ if (window.location.pathname.includes('/panel-control/vehicles')) {
 
         // inisiasi data tables
         $('#vehiclesTable').DataTable({
-            responsive: true,
-            autoWidth: false,
-            pageLength: 10,
-            lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
-            language: {
-                search: "Cari:",
-                lengthMenu: "Tampilkan _MENU_ Entri",
-                info: "Menampilkan _START_ sampai _END_ dari _TOTAL_ entri",
-                infoEmpty: "Tidak ada data yang tersedia",
-                paginate: {
-                    first: "Pertama",
-                    last: "Terakhir",
-                    next: "Selanjutnya",
-                    previous: "Sebelumnya",
-                },
-            }
+          responsive: true,
+          autoWidth: false,
+          pageLenght: 10,
+          lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
+          language: {
+            search: "Cari:",
+            lengthMenu: "Tampilkan _MENU_ Entri",
+            info: "Menampilkan _START_ sampai _END_ dari _TOTAL_ entri",
+            infoEmpty: "Tidak ada data yang tersedia",
+            paginate: {
+              first: "Pertama",
+              last: "Terakhir",
+              next: "Selanjutnya",
+              previous: "Sebelumnya",
+            },
+          }
         });
     }
 
-    // Fixed edit is_stolen logic
-    window.showEditVehicleModal = function(id, index) {
+    function showEditVehicleModal(id, index) {
         clearEditFormErrors();
         const item = window.vehicleData[index];
 
@@ -187,16 +187,12 @@ if (window.location.pathname.includes('/panel-control/vehicles')) {
         document.getElementById("editBrand").value = item.brand || '';
         document.getElementById("editColor").value = item.color || '';
 
-        // Fix: Explicitly compare to 1, covers "1", 1, "0", 0
-        if (item.is_stolen == 1) {
+        if (item.is_stolen) {
             document.getElementById("editIsStolenYes").checked = true;
-            document.getElementById("editIsStolenNo").checked = false;
         } else {
-            document.getElementById("editIsStolenYes").checked = false;
             document.getElementById("editIsStolenNo").checked = true;
         }
     }
-
     async function updateVehicle(event) {
         event.preventDefault();
         clearEditFormErrors();
@@ -206,8 +202,7 @@ if (window.location.pathname.includes('/panel-control/vehicles')) {
         const type = document.getElementById("editType").value.trim();
         const brand = document.getElementById("editBrand").value.trim();
         const color = document.getElementById("editColor").value.trim();
-        // Ambil value radio button yang terpilih
-        const isStolen = document.querySelector('input[name="editIsStolen"]:checked')?.value === '1';
+        const isStolen = document.getElementById("editIsStolenYes").checked ? 1 : 0;
 
         const token = decodeURIComponent(getCookie('token'));
 
@@ -258,7 +253,6 @@ if (window.location.pathname.includes('/panel-control/vehicles')) {
     }
 }
 
-// Fungsi global
 async function confirmDeleteVehicle(id) {
     console.log("Delete vehicle with ID:", id);
     const result = await Swal.fire({
@@ -302,11 +296,4 @@ async function deleteVehicle(id) {
         const errorMessage = error.response?.data?.message || "Terjadi kesalahan saat menghapus data.";
         showErrorToast(errorMessage);
     }
-}
-
-// Pastikan ada fungsi getCookie
-function getCookie(name) {
-    const value = `; ${document.cookie}`;
-    const parts = value.split(`; ${name}=`);
-    if (parts.length === 2) return parts.pop().split(';').shift();
 }
