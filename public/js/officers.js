@@ -15,15 +15,15 @@ document.addEventListener("DOMContentLoaded", async function () {
         console.error("Load error:", err);
     }
 
-    // Tombol Tambah
+    
     document.getElementById("addOfficerBtn").addEventListener("click", () => {
         document.getElementById("createOfficerForm").reset();
         clearCreateErrors();
     });
 
-    // Submit Tambah
+    
     document.getElementById("createOfficerForm").addEventListener("submit", addOfficer);
-    // Submit Edit
+  
     document.getElementById("editOfficerForm").addEventListener("submit", updateOfficer);
 });
 

@@ -157,24 +157,24 @@ if (window.location.pathname.includes('/panel-control/vehicles')) {
         });
 
         // inisiasi data tables
-        $('#vehiclesTable').DataTable({
-          responsive: true,
-          autoWidth: false,
-          pageLenght: 10,
-          lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
-          language: {
-            search: "Cari:",
-            lengthMenu: "Tampilkan _MENU_ Entri",
-            info: "Menampilkan _START_ sampai _END_ dari _TOTAL_ entri",
-            infoEmpty: "Tidak ada data yang tersedia",
-            paginate: {
-              first: "Pertama",
-              last: "Terakhir",
-              next: "Selanjutnya",
-              previous: "Sebelumnya",
-            },
-          }
-        });
+       $('#vehiclesTable').DataTable({
+            responsive: true,
+            autoWidth: false,
+            pageLength: 10,
+            lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
+            language: {
+                search: "Cari:",
+                lengthMenu: "Tampilkan _MENU_ Entri",
+                info: "Menampilkan _START_ sampai _END_ dari _TOTAL_ entri",
+                infoEmpty: "Tidak ada data yang tersedia",
+                paginate: {
+                first: "Pertama",
+                last: "Terakhir",
+                next: "Selanjutnya",
+                previous: "Sebelumnya",
+                },
+            }
+            });
     }
 
     function showEditVehicleModal(id, index) {
