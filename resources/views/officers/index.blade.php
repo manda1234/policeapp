@@ -43,13 +43,26 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
-                    @foreach (['Name', 'BadgeNumber', 'Rank', 'AssignedArea'] as $field)
                     <div class="mb-3">
-                        <label for="create{{ $field }}" class="form-label">{{ str_replace('Number', ' Number', $field) }}</label>
-                        <input type="text" class="form-control" id="create{{ $field }}">
-                        <small id="create{{ $field }}Error" class="text-danger"></small>
+                        <label for="createName" class="form-label">Name</label>
+                        <input type="text" class="form-control" id="createName">
+                        <small id="createNameError" class="text-danger"></small>
                     </div>
-                    @endforeach
+                    <div class="mb-3">
+                        <label for="createBadgeNumber" class="form-label">Badge Number</label>
+                        <input type="text" class="form-control" id="createBadgeNumber">
+                        <small id="createBadgeNumberError" class="text-danger"></small>
+                    </div>
+                    <div class="mb-3">
+                        <label for="createRank" class="form-label">Rank</label>
+                        <input type="text" class="form-control" id="createRank">
+                        <small id="createRankError" class="text-danger"></small>
+                    </div>
+                    <div class="mb-3">
+                        <label for="createAssignedArea" class="form-label">Assigned Area</label>
+                        <input type="text" class="form-control" id="createAssignedArea">
+                        <small id="createAssignedAreaError" class="text-danger"></small>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -71,13 +84,26 @@
                 </div>
                 <div class="modal-body">
                     <input type="hidden" id="editOfficerId">
-                    @foreach (['Name', 'BadgeNumber', 'Rank', 'AssignedArea'] as $field)
                     <div class="mb-3">
-                        <label for="edit{{ $field }}" class="form-label">{{ str_replace('Number', ' Number', $field) }}</label>
-                        <input type="text" class="form-control" id="edit{{ $field }}">
-                        <small id="edit{{ $field }}Error" class="text-danger"></small>
+                        <label for="editName" class="form-label">Name</label>
+                        <input type="text" class="form-control" id="editName">
+                        <small id="editNameError" class="text-danger"></small>
                     </div>
-                    @endforeach
+                    <div class="mb-3">
+                        <label for="editBadgeNumber" class="form-label">Badge Number</label>
+                        <input type="text" class="form-control" id="editBadgeNumber">
+                        <small id="editBadgeNumberError" class="text-danger"></small>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editRank" class="form-label">Rank</label>
+                        <input type="text" class="form-control" id="editRank">
+                        <small id="editRankError" class="text-danger"></small>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editAssignedArea" class="form-label">Assigned Area</label>
+                        <input type="text" class="form-control" id="editAssignedArea">
+                        <small id="editAssignedAreaError" class="text-danger"></small>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -88,4 +114,3 @@
     </div>
 </div>
 @endsection
-
